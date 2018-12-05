@@ -1,3 +1,9 @@
+# Vanilla Docker Packaging Example
+
+The goal of this directory is to demonstrate good practices for archiving models using the Boltzmann Wealth Model
+example from the 
+[Mesa Python ABM framework](https://github.com/projectmesa/mesa/tree/master/examples/boltzmann_wealth_model)
+
 # Instructions
 
 Build the Docker image
