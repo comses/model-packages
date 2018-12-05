@@ -1,0 +1,19 @@
+# Instructions
+
+Build the Docker image
+
+```
+docker build -t boltzmann-model-docker -f Dockerfile ..
+```
+
+Then create a container from the image
+
+```
+docker run -it --rm -p 127.0.0.1:8521:8521 boltzmann-model-docker bash
+```
+
+Run the model inside in docker container
+
+```
+mesa runserver
+```
