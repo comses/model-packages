@@ -1,22 +1,10 @@
-let nixpkgs = import <nixpkgs> { overlays = 
-  [
-    # jupyter builds with tornado 5 by default and mesa doesn't support tornado 5 yet
-    # so build jupyter with tornado 4 for compatibility
-    (self: super: let myOverride = { 
-      packageOverrides = self: super: {
-        tornado = super.tornado_4;
-      };
-    };
-  
-    in { python36 = super.python36.override myOverride; })
-  ]; 
-};
+let nixpkgs = import ./pinned.nix;
 mesa = with (nixpkgs.lib.mergeAttrs nixpkgs.pkgs.python36Packages { stdenv = nixpkgs.stdenv; }); callPackage ./mesa.nix { };
 p = nixpkgs.pkgs.python36Packages;
-mesa-raw = ./mesa;
+mesa-raw = ../../src;
 mesa-src = nixpkgs.runCommand "mesa_src" {} ''
-  mkdir -p "$out/mesa"
-  cp -r ${mesa-raw}/* "$out/mesa"
+  mkdir -p "$out/app/src"
+  cp -r ${mesa-raw}/* "$out/app/src"
 '';
 in 
 nixpkgs.pkgs.dockerTools.buildImage {
@@ -25,6 +13,7 @@ nixpkgs.pkgs.dockerTools.buildImage {
     nixpkgs.pkgs.bashInteractive
     nixpkgs.pkgs.coreutils
     nixpkgs.pkgs.glibcLocales
+    p.python
     p.networkx
     p.matplotlib
     mesa
@@ -34,6 +23,6 @@ nixpkgs.pkgs.dockerTools.buildImage {
     Env = ["LANG=en_US.UTF8"
            "LOCALE_ARCHIVE=${nixpkgs.pkgs.glibcLocales}/lib/locale/locale-archive"];
     Cmd = "bash";
-    WorkingDir = "/mesa/examples/boltzmann_wealth_model_network";
+    WorkingDir = "/app";
   };
 }
