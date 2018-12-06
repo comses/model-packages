@@ -4,6 +4,10 @@ The goal of this directory is to demonstrate good practices for archiving models
 example from the 
 [Mesa Python ABM framework](https://github.com/projectmesa/mesa/tree/master/examples/boltzmann_wealth_model)
 
+# Software Requirements
+
+You'll need `docker` installed for this example to work
+
 # Instructions
 
 Build the Docker image
