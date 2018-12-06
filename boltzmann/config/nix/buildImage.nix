@@ -9,16 +9,18 @@ mesa-src = nixpkgs.runCommand "mesa_src" {} ''
 in 
 nixpkgs.pkgs.dockerTools.buildImage {
   name = "boltzmann-nix";
-  contents = [
-    nixpkgs.pkgs.bashInteractive
-    nixpkgs.pkgs.coreutils
-    nixpkgs.pkgs.glibcLocales
-    p.python
-    p.networkx
-    p.matplotlib
-    mesa
+  contents = (with nixpkgs.pkgs; [
+    bashInteractive
+    coreutils
+    glibcLocales
+    (python36.withPackages (p: with p; [
+      p.networkx
+      p.matplotlib
+      mesa
+    ]))
+  ] ++ [
     mesa-src
-  ];
+  ]); 
   config = {
     Env = ["LANG=en_US.UTF8"
            "LOCALE_ARCHIVE=${nixpkgs.pkgs.glibcLocales}/lib/locale/locale-archive"];
