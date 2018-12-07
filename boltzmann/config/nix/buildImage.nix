@@ -9,6 +9,7 @@ mesa-src = nixpkgs.runCommand "mesa_src" {} ''
 in 
 nixpkgs.pkgs.dockerTools.buildImage {
   name = "boltzmann-nix";
+  tag = "latest";
   contents = (with nixpkgs.pkgs; [
     bashInteractive
     coreutils
@@ -24,7 +25,7 @@ nixpkgs.pkgs.dockerTools.buildImage {
   config = {
     Env = ["LANG=en_US.UTF8"
            "LOCALE_ARCHIVE=${nixpkgs.pkgs.glibcLocales}/lib/locale/locale-archive"];
-    Cmd = "bash";
-    WorkingDir = "/app";
+    Cmd = "mesa runserver";
+    WorkingDir = "/app/src";
   };
 }

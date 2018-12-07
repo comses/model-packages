@@ -7,4 +7,6 @@ WORKDIR /app
 COPY src src/
 RUN pip3 install -r src/requirements.txt
 
+WORKDIR /app/src
+
 CMD ["bash"]

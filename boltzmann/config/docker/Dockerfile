@@ -8,4 +8,6 @@ COPY src src/
 RUN pip3 install -r src/requirements.txt
 RUN apk add bash sqlite-dev && pip3 install reprozip reprounzip reprounzip-docker
 
-CMD ["bash"]
+WORKDIR /app/src
+
+CMD ["mesa", "runserver"]
