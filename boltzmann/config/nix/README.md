@@ -1,31 +1,20 @@
 # Building in Nix
 
-## Instructions
+## Software Requirements
 
 [Install nix](https://nixos.org/nix/) directly on your machine (will only work on Linux)
 
-Then build the docker image
+## Instructions
 
-```
-nix build -f buildImage.nix
-```
+Use the `Makefile` at the root of this example.
 
-Load the image into docker
+## Contents
 
-```
-docker load < result
-```
-
-Create a container from the image
-
-```
-docker run -it --rm -p 127.0.0.1:8521:8521 $IMAGE_NAME
-```
-
-Run the model (from the previous command you should be on a terminal inside the docker container
-
-```
-mesa runserver
-```
-
-Open your web browser at 127.0.0.1:8521 to try out the model.
+- `buildImage.nix` - a recipe to build a Docker image of the model
+- `shell.nix` - an environment to develop work on the model in. In this
+  directory you can type `nix-shell` into the CLI and you will now be in
+  a shell that contains all your dependencies
+- `mesa.nix` - a recipe to build the `Mesa` ABM python package in Nix
+- `pinned.nix` - a declaration of what snapshot of the Nix package
+  repository to use to the Docker image, Mesa package and shell environment
+  from

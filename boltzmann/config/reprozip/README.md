@@ -1,17 +1,3 @@
-# Software Requirements
-
-All Operating Systems:
-
-- docker
-
-On Mac OS X and Windows:
-
-- reprounzip
-- reprounzip-docker
-
-(provided you don't want to figure out how to access the docker api on the host
-from within the container on Windows and Mac OS X)
-
 # Overview
 
 Reprozip and reprounzip are packages for creating, bundling and executing
@@ -25,52 +11,25 @@ directly on your machine avoids having to docker installed in the docker
 container or exposing access to the Docker API from your host computer to your
 container.
 
-# Instruction
+## Software Requirements
 
-Setup the project. This downloads the Mesa model `boltzmann_wealth_model_network`
-and places it in the current directory. It builds the Docker image with 
-`reprozip` in it.
+All Operating Systems:
 
-```
-./reprozip_demo.sh setup
-```
+- docker
 
-## Build a Reprozip archive of your experiment run
+On Mac OS X and Windows:
 
-Create and enter a container built on the previously created `reprozip` image
+- reprounzip
+- reprounzip-docker
 
-```
-./reprozip_demo.sh run 
-# On Windows and Mac OS X just run
-# docker run -it --rm -v .:/data -p 127.0.0.1:8521:8521 boltzmann-model-reprozip bash
-# Instead
-```
+(provided you don't want to figure out how to access the docker api on the host
+from within the container on Windows and Mac OS X)
 
-Trace a interactive model run
+## Instructions
 
-```
-cd boltzmann
-reprozip trace python3 -m boltzmann_wealth_model_network.headless_run
-```
+Use the `Makefile` in the root of the project.
 
-This will start the Mesa model non interactively.
+## Contents
 
-Reprozip should now have archived the dependencies for your run of the model.
-To save the dependencies in an archive run
-
-```
-reprozip pack
-```
-
-This will create a file called `experiment.rpz` in the current directory.
-
-## Run the experiment recorded in the Reprozip archive
-
-Since you have `reprounzip` and `reprounzip-docker` installed on your base
-system if you've exited the container you can run
-
-```
-reprounzip docker run experiment.rpz
-```
-
-to rerun the experiment.
+- `Dockerfile` - instructions for building an image that has `reprozip` and
+  `reprounzip` in it. Used to build and run reprozips archives.
