@@ -43,7 +43,7 @@ ${reprozip_builder_image}: ${CONFIG_BASE_PATH}/reprozip/Dockerfile ${cache}
 
 reprozip_experiment=results/experiment.rpz
 ${reprozip_experiment}: ${reprozip_builder_image}
-	docker run ${DOCKER_RUN_OPTS} ${REPROZIP_BUILDER_IMAGE_NAME} bash -c "reprozip trace python3 -m boltzmann_wealth_model_network.headless_run; reprozip pack && mv experiment.rpz ../data/"
+	docker run ${DOCKER_RUN_OPTS} --cap-add=SYS_PTRACE ${REPROZIP_BUILDER_IMAGE_NAME} bash -c "reprozip trace python3 -m boltzmann_wealth_model_network.headless_run; reprozip pack && mv experiment.rpz ../data/"
 
 images: nix-image docker-image reprozip-builder-image
 
@@ -64,7 +64,8 @@ nix-headless: ${nix_image}
 	docker run ${DOCKER_RUN_OPTS} ${NIX_IMAGE_NAME} python3 ${RUN_HEADLESS}
 
 reprozip-headless: ${reprozip_builder_image} ${reprozip_experiment}
-	docker run ${DOCKER_RUN_OPTS} -v /var/run/docker.sock:/var/run/docker.sock ${REPROZIP_IMAGE_NAME} bash # -c "reprounzip docker run ../data/experiment.rpz" 
+	@echo "Follow instructions at https://docs.reprozip.org/en/1.0.x/unpacking.html to run or inspect an experiment"
+	docker run ${DOCKER_RUN_OPTS} -v /var/run/docker.sock:/var/run/docker.sock --cap-add=SYS_PTRACE ${REPROZIP_IMAGE_NAME} bash  
 
 #
 # Util
