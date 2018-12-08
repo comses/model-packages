@@ -6,7 +6,9 @@
 
 ## Instructions
 
-Use the `Makefile` at the root of this example.
+Use the `Makefile` at the root of this example. Run `make nix-runserver` to run
+the model interactively (open a web browser at localhost:8521) or
+`nix-headless` the run the model without interaction
 
 ## Contents
 

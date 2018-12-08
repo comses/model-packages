@@ -7,9 +7,11 @@ RUN apt-get update \
 WORKDIR /app
 
 COPY src src/
-RUN pip3 install -r src/requirements.txt
-RUN pip3 install reprozip reprounzip reprounzip-docker
-
 WORKDIR /app/src
+RUN pip3 install -r requirements.txt \
+  && pip3 install reprozip==1.0.14
 
-CMD ["mesa", "runserver"]
+COPY config/reprozip/run.sh .
+COPY config/reprozip/additional_patterns.yml .
+
+CMD ["bash", "run.sh"]

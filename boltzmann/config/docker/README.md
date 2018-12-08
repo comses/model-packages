@@ -10,7 +10,9 @@ You'll need `docker` installed for this example to work
 
 ## Instructions
 
-Use the `Makefile` at the root of the example.
+Use the `Makefile` at the root of the example. Run `make docker-runserver` for
+a interactive example (open your browser at localhost:8521) or 
+`make docker-headless` to run model non interactively.
 
 ## Contents
 

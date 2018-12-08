@@ -3,14 +3,6 @@
 Reprozip and reprounzip are packages for creating, bundling and executing
 experiments.
 
-This example packages `reprozip` itself in docker because `reprozip` only
-works on Linux. `reprounzip` works on Windows, Mac OS X and Linux so it
-does not need to be  included in the Dockerfile. `reprounzip` also uses 
-docker to run experiments so having `reprounzip` installed on the installed
-directly on your machine avoids having to docker installed in the docker
-container or exposing access to the Docker API from your host computer to your
-container.
-
 ## Software Requirements
 
 All Operating Systems:
@@ -27,7 +19,19 @@ from within the container on Windows and Mac OS X)
 
 ## Instructions
 
-Use the `Makefile` in the root of the project.
+Use the `Makefile` in the root of the project. Run `make reprozip-headless`
+to drop into an interactive shell with reprounzip installed and an experiment
+file available at `data/experiment.rpz`. Follow the instructions on the 
+[reprozip](https://docs.reprozip.org/en/1.0.x/unpacking.html) website for
+unpacking and exploring an experiment file.
+
+You'll want to unpack the experiment first:
+
+```
+reprounzip docker setup data/experiment.rpz data/experiment
+```
+
+Now you can rerun the experiment or export any results.
 
 ## Contents
 

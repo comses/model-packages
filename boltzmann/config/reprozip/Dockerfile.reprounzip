@@ -1,0 +1,8 @@
+FROM docker:18.09
+
+RUN apk add --no-cache bash python3 sqlite-dev \
+  && pip3 install reprounzip==1.0.13 reprounzip-docker==1.0.13
+
+WORKDIR /app
+
+RUN mkdir -p data
