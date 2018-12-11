@@ -38,11 +38,7 @@ reprounzip docker run experiment --cmdline bash
 
 ## Instructions
 
-Use the `Makefile` in the root of the project. Run `make reprozip-headless`
-to drop into an interactive shell with reprounzip installed and an experiment
-file available at `experiments/experiment.rpz`. For more detailed instructions, read the manual at  
-[reprozip](https://docs.reprozip.org/en/1.0.x/unpacking.html) website for
-unpacking and exploring an experiment file.
+Use the `Makefile` in the root of the project. Run `make reprozip-headless` to drop into an interactive shell with reprounzip installed and an experiment file available at `experiments/experiment.rpz`. For more detailed instructions, read the manual at [reprozip](https://docs.reprozip.org/en/1.0.x/unpacking.html) website for unpacking and exploring an experiment file.
 
 You'll want to unpack the experiment first:
 
