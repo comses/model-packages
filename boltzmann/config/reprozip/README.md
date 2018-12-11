@@ -28,7 +28,9 @@ unpacking and exploring an experiment file.
 You'll want to unpack the experiment first:
 
 ```
-reprounzip docker setup data/experiment.rpz data/experiment
+reprounzip docker setup experiments/experiment.rpz experiments/experiment 
+# where experiments/experiment is name of the directory you want to unpack the
+# experiment into
 ```
 
 Now you can rerun the experiment or export any results.
