@@ -6,12 +6,12 @@ import (builtins.fetchGit {
   [
     # jupyter builds with tornado 5 by default and mesa doesn't support tornado 5 yet
     # so build jupyter with tornado 4 for compatibility
-    (self: super: let myOverride = { 
+    (self: super: let tornadoOverride = { 
       packageOverrides = self: super: {
         tornado = super.tornado_4;
       };
     };
   
-    in { python36 = super.python36.override myOverride; })
+    in { python36 = super.python36.override tornadoOverride; })
   ]; 
 }

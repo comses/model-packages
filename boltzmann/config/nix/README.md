@@ -1,5 +1,9 @@
 # Building in Nix
 
+Nix is a package manager that works on Linux and Mac OS X that supports multiple
+versions of a package and creating isolated environments for developing
+software.
+
 ## Software Requirements
 
 [Install nix](https://nixos.org/nix/) directly on your machine (will only work on Linux)
