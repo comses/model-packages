@@ -1,9 +1,10 @@
 CONFIG_BASE_PATH=config
 
-DOCKER_IMAGE_NAME=boltzmann-docker
-REPROZIP_BUILDER_IMAGE_NAME=boltzmann-builder-reprozip
-REPROUNZIP_RUNNER_IMAGE_NAME=boltzmann-runner-reprounzip
-NIX_IMAGE_NAME=boltzmann-nix:latest
+ORG_PREFIX=comses
+DOCKER_IMAGE_NAME=${ORG_PREFIX}/boltzmann-docker
+REPROZIP_BUILDER_IMAGE_NAME=${ORG_PREFIX}/boltzmann-builder-reprozip
+REPROUNZIP_RUNNER_IMAGE_NAME=${ORG_PREFIX}/boltzmann-runner-reprounzip
+NIX_IMAGE_NAME=${ORG_PREFIX}/boltzmann-nix:latest
 
 DOCKER_RUN_OPTS=-it --rm -v ${PWD}/results:/app/data -p 127.0.0.1:8521:8521
 
