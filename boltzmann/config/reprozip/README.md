@@ -17,6 +17,39 @@ On Mac OS X and Windows:
 (provided you don't want to figure out how to access the docker api on the host
 from within the container on Windows and Mac OS X)
 
+## Overview
+
+`reprozip ` is a package for tracing experiments. It is run on the command line
+and uses the [PTRACE](http://www.man7.org/linux/man-pages/man2/ptrace.2.html#NAME)
+system call to identity what the dependencies of an experiment (in this case a run
+of the Mesa Boltzmann wealth network model). This means it an experiment should contain
+all the files necessary to run on another another computer. This includes system and
+library dependencies, source code as well as input and output data.
+
+`reprounzip` is a package for unpacking experiments and inspecting experiments made
+by `reprozip`. There are a number of different unpackers for `reprounzip`. This
+example mostly uses the `docker` unpacker but you may want to use some of the other
+examples in your own work.
+
+### Common Reprozip Commands
+
+```bash
+reprozip trace <cmd> # trace a script run with reprozip
+```
+
+### Common Reprounzip Commands
+
+```bash
+# unpack an experiment made by reprozip
+reprounzip docker setup experiment.rpz <dest>
+
+# run an unpacked experiment with docker
+reprounzip docker run experiment
+
+# enter an interactive environment with all the software needed to run the experiment
+reprounzip docker run experiment --cmdline bash
+```
+
 ## Instructions
 
 Use the `Makefile` in the root of the project. Run `make reprozip-headless`
