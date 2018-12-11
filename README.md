@@ -1,9 +1,6 @@
-# Packaging a Mesa Geo Model using different packaging formats
+# Comparison of reproducible package formats for an example Mesa agent based model
 
-This repository explores some of the existing solutions for packaging models.
-There are example model packages for Docker, Nix and Reprozip all using the
-same [mesa](https://github.com/projectmesa/mesa) model - Boltzmann Wealth Model
-Network.
+This repository explores some existing solutions for packaging computational models. There are example model packages for [Docker](https://docs.docker.com/install/), [Nix](https://nixos.org/nix/) and [Reprozip](https://www.reprozip.org/) all using the same agent based model example from the [Mesa ABM Framework](https://github.com/projectmesa/mesa) - the Boltzmann Wealth Model Network model.
 
 ## Contents
 
@@ -28,10 +25,14 @@ Network.
 1. packaging example with Docker
 2. packaging example with Nix
 3. packaging example with Reprozip
-4. Makefile to build and run all examples. Two run setups are available: the
-  Mesa runserver and the headless run. To run one of these options from try
-  `docker-runserver`, `docker-headless`, `nix-runserver`, `nix-headless` or
-  `reprozip-headless` from the command line. A `reprozip` example of tracing
-  a `runserver` session is not included.
+4. Makefile to build and run all examples. Two run setups are available: a Mesa runserver that provides interactive access by visiting `localhost:8521` and a headless run that generates data in `results/`. To run one of these options you can run `make docker-runserver`, `make docker-headless`, `make nix-runserver`, `make nix-headless` or `make reprozip-headless` from the command line. 
 
-Detailed packaging instructions are available in each example package folder.
+Detailed instructions are available in each example package folder.
+
+## Contributing
+
+A `reprozip` example tracing an interactive `runserver` session was too difficult to complete (help or a PR for that would be welcome!).
+
+If you have any improvements or suggestions please feel free to submit a PR or create an issue. Thanks!
+
+
