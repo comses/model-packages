@@ -60,3 +60,7 @@ I have not tried to create an example yet although it looks similar to Nix and G
 ### Thoughts
 
 The ability to use the dependency management tooling built for the Linux distribution and programming language reduces the amount of work required to create an archive of your computational model since the programming language's package manager has more packages defined than whole system package managers like Nix and Guix.
+
+The reprozip packages have some system dependencies like sqlite but is otherwise straight forward to install. Experiment archives are small but also don't have important base packages without manually editing the Dockerfile or explicitly adding paths to libraries and executables you want to include in the image for interactive use (such as `coreutils` and `bash`).
+
+Docker was the simplest of the options to setup for the Boltzmann example. It worked with the existing requirements.txt file (Nix has third party support with `pypi2nix` but still requires creating any packages that aren't already in nixpkgs or third party overlays). It also includes a recipe to rebuild the execution environment (the Dockerfile). Reprozip required knowledge of Docker in order to execute the model interactively (mounting volumes to access experiment run data) so some Docker knowledge ends up being necessary anyway.
