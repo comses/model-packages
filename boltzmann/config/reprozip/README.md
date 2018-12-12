@@ -50,7 +50,23 @@ reprounzip docker setup experiments/experiment.rpz <output-directory>
 # experiments/unpack-output
 ```
 
-Now you can rerun the experiment or export any results.
+Now you can rerun the experiment or export any results. You may want to run something like
+
+```
+reprounzip docker run experiment --cmdline bash
+```
+
+To start an interactive session and then run one of the previous command line invocations like
+
+```
+python -m boltzmann_wealth_model_network.headless_run test
+```
+
+To run the model to generate some new inputs. Model results will be available for inspection in the `data/` folder. You'll also probably want the analysis data to be available outside the container. In order to do that you'll need to use `docker cp <container_name>:<source path> <destination path>` to get the data outside the container. It is also possible to write to a shared directory. To do that you can run the experiment by passing options to `docker` with the `--docker-opt` flag. The following will mount the `results` folder of the current directory to `/app/data` location in the container (which is where the script will write its output files to).
+
+```
+reprounzip docker run experiment --docker-opt=-v --docker-opt=$PWD/results:/app/data
+```
 
 ## Contents
 
