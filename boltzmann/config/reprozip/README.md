@@ -38,8 +38,7 @@ reprounzip docker run experiment --cmdline bash
 
 ## Instructions
 
-Use the `Makefile` in the root of the project. Run `make reprozip-headless` to drop into an interactive shell with reprounzip installed and an experiment file available at `experiments/experiment.rpz`. For more detailed instructions, read the manual at [reprozip](https://docs.reprozip.org/en/1.0.x/unpacking.html) website for unpacking and exploring an experiment file.
-
+Use the `Makefile` in the root of the project. Run `make reprozip-headless` to generate an `experiment.rpz` file in the results folder. 
 You'll want to unpack the experiment first:
 
 ```
@@ -67,6 +66,11 @@ To run the model to generate some new inputs. Model results will be available fo
 ```
 reprounzip docker run experiment --docker-opt=-v --docker-opt=$PWD/results:/app/data
 ```
+
+#### Resources
+
+- [reprozip unpacking](https://docs.reprozip.org/en/1.0.x/unpacking.html) docs
+
 
 ## Contents
 
