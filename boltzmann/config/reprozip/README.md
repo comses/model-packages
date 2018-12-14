@@ -33,7 +33,7 @@ reprounzip docker setup experiment.rpz <dest>
 reprounzip docker run experiment
 
 # enter an interactive environment with all the software needed to run the experiment
-reprounzip docker run experiment --cmdline bash
+reprounzip docker run experiment --cmdline /busybox ash
 ```
 
 ## Instructions
@@ -49,10 +49,14 @@ reprounzip docker setup experiments/experiment.rpz <output-directory>
 # experiments/unpack-output
 ```
 
-Now you can rerun the experiment or export any results. You may want to run something like
+Now you can rerun the experiment or export any results.
+
+Below are some examples of using 
+
+### Using Docker Volume Mounts to Save Data
 
 ```
-reprounzip docker run experiment --cmdline bash
+reprounzip docker run <experiment-directory> --cmdline /busybox ash
 ```
 
 To start an interactive session and then run one of the previous command line invocations like
@@ -61,11 +65,54 @@ To start an interactive session and then run one of the previous command line in
 python -m boltzmann_wealth_model_network.headless_run test
 ```
 
-To run the model to generate some new inputs. Model results will be available for inspection in the `data/` folder. You'll also probably want the analysis data to be available outside the container. In order to do that you'll need to use `docker cp <container_name>:<source path> <destination path>` to get the data outside the container. It is also possible to write to a shared directory. To do that you can run the experiment by passing options to `docker` with the `--docker-opt` flag. The following will mount the `results` folder of the current directory to `/app/data` location in the container (which is where the script will write its output files to).
+to run the model to generate some new outputs. Model results will be available for inspection in the `data/` folder. You'll also probably want the analysis data to be available outside the container. In order to do that you'll need to use `docker cp <container_name>:<source path> <destination path>` to get the data outside the container. It is also possible to write to a shared directory. To do that you can run the experiment by passing options to `docker` with the `--docker-opt` flag. The following will mount the `results` folder of the current directory to `/app/data` location in the container (which is where the script will write its output files to).
 
 ```
-reprounzip docker run experiment --docker-opt=-v --docker-opt=$PWD/results:/app/data
+reprounzip docker run <experiment-directory> --docker-option=-v --docker-option=$PWD/results:/app/data
 ```
+
+### Using Docker Images Created by Previous Docker Runs
+
+To run a new experiment without any manual intervention you could run
+
+```bash
+reprounzip docker run <experiment-directory> --cmdline python3 -m boltzmann_wealth_model_network.headless_run test
+```
+
+Which will hopefully print out something like
+
+```
+*** Command finished, status: 0
+sha256:ed53df84ffd072addf62e70c63687aa99a695a8797f3b8ea6eae43a21693d8fa
+reprounzip_run_i4snt4qodf
+```
+
+This will create a new image with a sha256 noted as above. Find the docker image with that sha by running `docker images`. Then run that image using the found ID.
+
+```bash
+docker run -it <image-name> bash
+```
+
+Then look at the data created from a previous run 
+
+```bash
+cd /app/data
+ls
+```
+
+In a different terminal (with the container still running) it is possible to copy the data out.
+
+```bash
+docker cp <container-name>:/app/data/test_agents.csv .
+```
+
+For output file names identified by the experiment archives such as `reprozip1_agents.csv` you are able to download the output data much more easily with
+
+```bash
+reprounzip docker download <output-file-name>
+```
+
+*Note*: ReproUnzip 1.1 will support downloading files at arbitrary paths in the container which will make that convoluted `docker cp` process above unnecessary
 
 #### Resources
 
@@ -74,5 +121,4 @@ reprounzip docker run experiment --docker-opt=-v --docker-opt=$PWD/results:/app/
 
 ## Contents
 
-- `Dockerfile` - instructions for building an image that has `reprozip` and
-  `reprounzip` in it. Used to build and run reprozips archives.
+- `Dockerfile` - instructions for building an image that has `reprozip` and `reprounzip` in it. Used to build and run reprozips archives.

@@ -75,6 +75,9 @@ reprozip-headless: ${reprozip_experiment} ${reprounzip_runner_image}
 	@echo "See the instructions in the config/reprozip folder for details"
 	command -v reprounzip || echo "You'll need to install reprounzip to work with the generated experiment.rpz"
 
+reprounzip-shell: ${reprounzip_runner_image}
+	docker run ${DOCKER_RUN_OPTS} -v /var/run/docker.sock:/var/run/docker.sock ${REPROUNZIP_RUNNER_IMAGE_NAME} bash
+
 #
 # Util
 #

@@ -19,6 +19,6 @@ COPY src src/
 WORKDIR /app/src
 RUN pip3 install -r requirements.txt && pip3 install reprozip==1.0.14
 
-COPY config/reprozip/run.sh config/reprozip/additional_patterns.yml ./
+COPY config/reprozip/run.sh ./
 
 CMD ["bash", "run.sh"]
