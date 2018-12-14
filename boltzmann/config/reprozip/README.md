@@ -90,7 +90,7 @@ reprounzip_run_i4snt4qodf
 This will create a new image with a sha256 noted as above. Find the docker image with that sha by running `docker images`. Then run that image using the found ID.
 
 ```bash
-docker run -it <image-name> bash
+docker run -it <image-name> /busybox ash
 ```
 
 Then look at the data created from a previous run 
